@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/root_hour_view_fragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <include
+        layout="@layout/toolbar_hour_view"
+        android:id="@+id/tlb_hour_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <com.wiseassblog.samsaradayplanner.ui.managehourview.HourToggleView
+        android:id="@+id/vqht_one"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tlb_hour_view"
+        app:layout_constraintBottom_toTopOf="@+id/vqht_two"
+        />
+
+    <com.wiseassblog.samsaradayplanner.ui.managehourview.HourToggleView
+        android:id="@+id/vqht_two"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vqht_one"
+        app:layout_constraintBottom_toTopOf="@+id/vqht_three"
+        />
+
+    <com.wiseassblog.samsaradayplanner.ui.managehourview.HourToggleView
+        android:id="@+id/vqht_three"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vqht_two"
+        app:layout_constraintBottom_toTopOf="@+id/vqht_four"
+        />
+
+    <com.wiseassblog.samsaradayplanner.ui.managehourview.HourToggleView
+        android:id="@+id/vqht_four"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vqht_three"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

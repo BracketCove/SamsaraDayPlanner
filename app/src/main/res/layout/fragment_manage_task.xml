@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/tlb_manage_task"
+        layout="@layout/toolbar_manage_task"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_task_name"
+        style="@style/OutlineTextBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tlb_manage_task">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_task_name"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:maxLines="1"
+            android:paddingStart="16dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <ImageView
+        android:id="@+id/imv_icon_selection"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        app:tint="@color/colorAccent"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_work"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_task_name"
+        app:layout_constraintBottom_toTopOf="@+id/btn_select_colour"
+
+        />
+
+    <Spinner
+        style="@style/OutlineTextBox"
+        android:id="@+id/spn_task_icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imv_icon_selection"
+        app:layout_constraintTop_toBottomOf="@+id/til_task_name"
+        tools:listitem="@android:layout/simple_dropdown_item_1line"
+        />
+
+
+    <Button
+        android:id="@+id/btn_select_colour"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_margin="16dp"
+        android:text="COLOR"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spn_task_icon" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/cdl_bottom_sheet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.wiseassblog.samsaradayplanner.ui.managetaskview.ColorPickerView
+            android:id="@+id/bts_select_color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:behavior_hideable="true"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

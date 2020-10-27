@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="88dp"
+    android:layout_height="88dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/div_hour_block"
+    >
+
+    <TextView
+        android:id="@+id/lbl_hour_block"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:alpha="0.87"
+        android:fontFamily="sans-serif-medium"
+        android:background="@color/colorPrimary"
+        android:layout_margin="2dp"
+        tools:text="12PM"
+        />
+
+    <ImageView
+        android:id="@+id/imv_hour_block_border"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/hour_block_grey_rounded_bg"
+        />
+</FrameLayout>
