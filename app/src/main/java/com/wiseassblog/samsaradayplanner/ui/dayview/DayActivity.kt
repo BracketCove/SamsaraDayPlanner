@@ -3,10 +3,8 @@ package com.wiseassblog.samsaradayplanner.ui.dayview
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.wiseassblog.samsaradayplanner.R
-import com.wiseassblog.samsaradayplanner.ui.dayview.DayView
-import com.wiseassblog.samsaradayplanner.ui.dayview.DayActivity
-import com.wiseassblog.samsaradayplanner.ui.dayview.buildlogic.DayViewInjector
 import com.wiseassblog.samsaradayplanner.SamsaraApp
+import com.wiseassblog.samsaradayplanner.ui.dayview.buildlogic.buildComponents
 
 //Feature level container
 class DayActivity : AppCompatActivity() {
@@ -24,7 +22,8 @@ class DayActivity : AppCompatActivity() {
             fragment!!,
             DAY_VIEW
         ).commit()
-        DayViewInjector.build(fragment, (application as SamsaraApp).serviceLocator)
+
+        buildComponents(fragment, (application as SamsaraApp).serviceLocator)
     }
 
     companion object {

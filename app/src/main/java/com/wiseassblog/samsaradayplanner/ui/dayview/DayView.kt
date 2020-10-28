@@ -43,22 +43,19 @@ class DayView : Fragment(), IDayViewContract.View {
     override fun onStart() {
         super.onStart()
         toolbarManageTasks = requireView().findViewById(R.id.imb_toolbar_manage_tasks)
-        toolbarManageTasks?.setOnClickListener(
-            View.OnClickListener { view: View? ->
-                logic!!.onViewEvent(
-                    DayViewEvent(
-                        DayViewEvent.Event.ON_MANAGE_TASKS_SELECTED,
-                        0
-                    )
-                )
-            }
-        )
+        toolbarManageTasks?.setOnClickListener {
+            logic?.onViewEvent(
+                DayViewEvent.OnManageTasksSelected
+            )
+        }
         rec = requireView().findViewById(R.id.rec_day_list)
     }
 
     override fun onResume() {
         super.onResume()
-        logic!!.onViewEvent(DayViewEvent(DayViewEvent.Event.ON_START, ""))
+        logic?.onViewEvent(
+            DayViewEvent.OnStart
+        )
     }
 
     override fun setData(day: Day, tasks: Tasks) {
@@ -69,11 +66,8 @@ class DayView : Fragment(), IDayViewContract.View {
                 tasks
             )
         ) { position: Int ->
-            logic!!.onViewEvent(
-                DayViewEvent(
-                    DayViewEvent.Event.ON_HOUR_SELECTED,
-                    position
-                )
+            logic?.onViewEvent(
+                DayViewEvent.OnHourSelected(position)
             )
         }
         rec!!.adapter = adapter

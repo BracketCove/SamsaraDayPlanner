@@ -6,7 +6,6 @@ import com.wiseassblog.samsaradayplanner.domain.*
 import com.wiseassblog.samsaradayplanner.domain.constants.HOUR_MODE
 import com.wiseassblog.samsaradayplanner.domain.constants.Messages.GENERIC_ERROR_MESSAGE
 import com.wiseassblog.samsaradayplanner.domain.constants.QUARTER
-import com.wiseassblog.samsaradayplanner.ui.managehourview.HourViewEvent
 
 class HourViewLogic(
     private val view: IHourContract.View,
@@ -15,11 +14,11 @@ class HourViewLogic(
     private val taskStorage: ITaskStorage
 ) : BaseViewLogic<HourViewEvent>() {
     override fun onViewEvent(event: HourViewEvent) {
-        when (event.event) {
-            HourViewEvent.Event.ON_START -> onStart()
-            HourViewEvent.Event.ON_DONE_CLICK -> onDone()
-            HourViewEvent.Event.ON_QUARTER_TOGGLE -> onQuarterToggled(event.quarter, event.isActive)
-            HourViewEvent.Event.ON_TASK_SELECTED -> onTaskSelected(event.quarter, event.position)
+        when (event) {
+            is HourViewEvent.OnStart -> onStart()
+            is HourViewEvent.OnDoneClick -> onDone()
+            is HourViewEvent.OnQuarterToggled -> onQuarterToggled(event.quarter, event.active)
+            is HourViewEvent.OnTaskSelected -> onTaskSelected(event.quarter, event.position)
         }
     }
 
@@ -27,7 +26,7 @@ class HourViewLogic(
         val hour = vm.hour
         var oldQuarterHour: QuarterHour? = null
         var quarterHourIndex = 0
-        for (q in hour.quarters) {
+        for (q in hour.quarters!!) {
             if (q.quarter == quarter) {
                 oldQuarterHour = q
                 break
@@ -57,7 +56,7 @@ class HourViewLogic(
         //Retrieve the correct Quarter Hour from current Hour
         var oldQuarterHour: QuarterHour? = null
         var quarterHourIndex = 0
-        for (q in hour.quarters) {
+        for (q in hour.quarters!!) {
             if (q.quarter == quarter) {
                 oldQuarterHour = q
                 break
@@ -124,7 +123,7 @@ class HourViewLogic(
     }
 
     private fun onTasksRetrieved(tasks: Tasks, hour: Hour, mode: HOUR_MODE) {
-        vm.setTaskList(tasks)
+        vm.tasks = tasks
         drawView(tasks, hour, mode)
     }
 
@@ -146,7 +145,7 @@ class HourViewLogic(
             )
             view.setQuarterHourActive(
                 q,
-                hour.quarters[index].isActive
+                hour.quarters!![index].isActive
             )
             view.setQuarterHourAdapterData(
                 q,
@@ -158,11 +157,12 @@ class HourViewLogic(
         view.setListeners()
     }
 
-    private fun getTaskNames(length: Int, tasks: Array<Task>): Array<String?> {
-        val taskNames = arrayOfNulls<String>(length)
+    private fun getTaskNames(length: Int, tasks: Array<Task>): Array<String> {
+        val taskNames = emptyArray<String>()
         for (i in 0 until length) {
             taskNames[i] = tasks[i].taskName
         }
+
         return taskNames
     }
 }

@@ -13,7 +13,7 @@ interface IDayViewContract {
     }
 
     interface ViewModel {
-        var day: Day?
-        var tasks: Tasks?
+        var day: Day
+        var tasks: Tasks
     }
 }

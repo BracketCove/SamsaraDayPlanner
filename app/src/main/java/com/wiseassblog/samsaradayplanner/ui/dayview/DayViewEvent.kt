@@ -3,9 +3,9 @@ package com.wiseassblog.samsaradayplanner.ui.dayview
 /**
  * It models interactions between the View and the Logic class
  */
-class DayViewEvent(val event: Event, val value: Any) {
+sealed class DayViewEvent {
+    object OnStart : DayViewEvent()
+    data class OnHourSelected(val position: Int) : DayViewEvent()
+    object OnManageTasksSelected : DayViewEvent()
 
-    enum class Event {
-        ON_START, ON_HOUR_SELECTED, ON_MANAGE_TASKS_SELECTED
-    }
 }

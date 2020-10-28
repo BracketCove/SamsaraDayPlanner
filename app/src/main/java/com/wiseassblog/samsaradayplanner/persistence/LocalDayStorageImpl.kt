@@ -41,7 +41,7 @@ class LocalDayStorageImpl(fileStorageDirectory: String, exec: ApplicationExecuto
      */
     @Throws(Exception::class)
     private fun preloadData(): Day {
-        val day = PreloadData.getPreloadedDay()
+        val day = PreloadData.preloadedDay
         updateDayToStorage(day)
         return day
     }

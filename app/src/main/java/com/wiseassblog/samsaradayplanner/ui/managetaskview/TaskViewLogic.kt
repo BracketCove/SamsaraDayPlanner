@@ -22,15 +22,12 @@ class TaskViewLogic
     private val storage: ITaskStorage
 ) : BaseViewLogic<TaskViewEvent>() {
     override fun onViewEvent(event: TaskViewEvent) {
-        //code like this make me miss Kotlin syntax...
-        when (event.event) {
-            TaskViewEvent.Event.ON_START -> onStart()
-            TaskViewEvent.Event.ON_COLOR_BUTTON_CLICK -> view.showColorPickerSheet()
-            TaskViewEvent.Event.ON_COLOR_SELECTED -> onColorSelected(event.value as COLOR)
-            TaskViewEvent.Event.ON_DONE_CLICK -> updateStorage()
-            TaskViewEvent.Event.ON_ICON_SELECTED -> onIconSelected(
-                event.value as ICON
-            )
+        when (event) {
+            is TaskViewEvent.OnStart -> onStart()
+            is TaskViewEvent.OnColorButtonClick -> view.showColorPickerSheet()
+            is TaskViewEvent.OnColorSelected -> onColorSelected(event.color)
+            is TaskViewEvent.OnDoneClick -> updateStorage()
+            is TaskViewEvent.OnIconSelected -> onIconSelected(event.icon)
         }
     }
 

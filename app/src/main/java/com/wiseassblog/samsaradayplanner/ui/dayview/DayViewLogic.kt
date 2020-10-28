@@ -20,10 +20,10 @@ class DayViewLogic(
     private val taskStorage: ITaskStorage
 ) : BaseViewLogic<DayViewEvent>() {
     override fun onViewEvent(event: DayViewEvent) {
-        when (event.event) {
-            DayViewEvent.Event.ON_START -> onStart()
-            DayViewEvent.Event.ON_HOUR_SELECTED -> onHourSelected(event.value as Int)
-            DayViewEvent.Event.ON_MANAGE_TASKS_SELECTED -> onManageTaskSelected()
+        when (event) {
+            is DayViewEvent.OnStart -> onStart()
+            is DayViewEvent.OnHourSelected -> onHourSelected(event.position)
+            is DayViewEvent.OnManageTasksSelected -> onManageTaskSelected()
         }
     }
 

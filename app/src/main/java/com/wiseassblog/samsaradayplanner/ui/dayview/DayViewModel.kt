@@ -14,6 +14,6 @@ import com.wiseassblog.samsaradayplanner.domain.Tasks
  * I do not need to reload them every time.
  */
 class DayViewModel : IDayViewContract.ViewModel {
-    override var day: Day? = null
-    override var tasks: Tasks? = null
+    override lateinit var day: Day
+    override lateinit var tasks: Tasks
 }

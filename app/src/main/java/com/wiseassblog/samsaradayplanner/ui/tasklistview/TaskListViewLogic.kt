@@ -10,10 +10,10 @@ class TaskListViewLogic(
     private val storage: ITaskStorage
 ) : BaseViewLogic<TasksListViewEvent>() {
     override fun onViewEvent(event: TasksListViewEvent) {
-        when (event.event) {
-            TasksListViewEvent.Event.ON_START -> onStart()
-            TasksListViewEvent.Event.ON_LIST_ITEM_SELECTED -> onItemSelected(event.value as Int)
-            TasksListViewEvent.Event.ON_BACK_PRESSED -> onBackPressed()
+        when (event) {
+            is TasksListViewEvent.OnStart -> onStart()
+            is TasksListViewEvent.OnListItemSelected -> onItemSelected(event.position)
+            is TasksListViewEvent.OnBackPressed -> onBackPressed()
         }
     }
 

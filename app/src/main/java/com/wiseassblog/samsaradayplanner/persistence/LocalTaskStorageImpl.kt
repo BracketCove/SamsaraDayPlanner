@@ -33,7 +33,7 @@ class LocalTaskStorageImpl(
 
     @Throws(Exception::class)
     private fun preloadData(): Tasks {
-        val tasks = PreloadData.getPreloadedTasks()
+        val tasks = PreloadData.preloadedTasks
         val fileOutputStream = FileOutputStream(pathToStorageFile)
         val objectOutputStream = ObjectOutputStream(fileOutputStream)
         objectOutputStream.writeObject(tasks)
