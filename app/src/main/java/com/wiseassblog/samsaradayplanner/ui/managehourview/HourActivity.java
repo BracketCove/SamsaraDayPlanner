@@ -11,10 +11,8 @@ import com.wiseassblog.samsaradayplanner.SamsaraApp;
 import com.wiseassblog.samsaradayplanner.domain.constants.Extras;
 import com.wiseassblog.samsaradayplanner.ui.dayview.DayActivity;
 import com.wiseassblog.samsaradayplanner.ui.managehourview.buildlogic.HourViewInjector;
-import com.wiseassblog.samsaradayplanner.ui.tasklistview.TaskListView;
-import com.wiseassblog.samsaradayplanner.ui.tasklistview.buildlogic.TaskListViewInjector;
 
-import static com.wiseassblog.samsaradayplanner.common.Messages.GENERIC_ERROR_MESSAGE;
+import static com.wiseassblog.samsaradayplanner.domain.constants.Messages.GENERIC_ERROR_MESSAGE;
 
 public class HourActivity extends AppCompatActivity {
 

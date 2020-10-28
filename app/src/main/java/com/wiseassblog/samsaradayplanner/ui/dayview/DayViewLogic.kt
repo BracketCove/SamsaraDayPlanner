@@ -1,8 +1,7 @@
 package com.wiseassblog.samsaradayplanner.ui.dayview
 
 import com.wiseassblog.samsaradayplanner.common.BaseViewLogic
-import com.wiseassblog.samsaradayplanner.common.Continuation
-import com.wiseassblog.samsaradayplanner.common.Messages
+import com.wiseassblog.samsaradayplanner.domain.constants.Messages
 import com.wiseassblog.samsaradayplanner.domain.Day
 import com.wiseassblog.samsaradayplanner.domain.IDayStorage
 import com.wiseassblog.samsaradayplanner.domain.ITaskStorage
@@ -45,29 +44,27 @@ class DayViewLogic(
      *
      */
     private fun onStart() {
-        dayStorage.getDay(object : Continuation<Day> {
-            override fun onSuccess(result: Day) {
-                getTasks(result)
-            }
-
-            override fun onException(e: Exception) {
+        dayStorage.getDay(
+            { day ->
+                getTasks(day)
+            },
+            { error ->
                 view.showMessage(Messages.GENERIC_ERROR_MESSAGE)
                 view.restartFeature()
             }
-        })
+        )
     }
 
-    private fun getTasks(dayResult: Day) {
-        taskStorage.getTasks(object : Continuation<Tasks> {
-            override fun onSuccess(taskResult: Tasks) {
-                bindData(dayResult, taskResult)
-            }
-
-            override fun onException(e: Exception) {
+    private fun getTasks(day: Day) {
+        taskStorage.getTasks(
+            { tasks ->
+                bindData(day, tasks)
+            },
+            {
                 view.showMessage(Messages.GENERIC_ERROR_MESSAGE)
                 view.restartFeature()
             }
-        })
+        )
     }
 
     private fun bindData(dayResult: Day, taskResult: Tasks) {

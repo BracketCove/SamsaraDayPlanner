@@ -8,9 +8,10 @@ import android.widget.BaseAdapter;
 
 import androidx.annotation.NonNull;
 
-import com.wiseassblog.samsaradayplanner.common.ColorUtility;
-import com.wiseassblog.samsaradayplanner.common.IconUtility;
 import com.wiseassblog.samsaradayplanner.domain.Task;
+
+import static com.wiseassblog.samsaradayplanner.common.ResourceUtilsKt.getColorResId;
+import static com.wiseassblog.samsaradayplanner.common.ResourceUtilsKt.getResIdFromEnum;
 
 class TaskGridItemViewAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
 
@@ -58,14 +59,14 @@ class TaskGridItemViewAdapter extends BaseAdapter implements AdapterView.OnItemC
         }
 
         gridItem.setListItemBackground(
-                ColorUtility.getColorResId(
+                getColorResId(
                         parent.getContext(),
                         taskItems[position].getTaskColor()
                 )
         );
 
         gridItem.setListItemIcon(
-                IconUtility.getResIdFromEnum(
+                getResIdFromEnum(
                         parent.getContext(),
                         taskItems[position].getTaskIcon()
                 )

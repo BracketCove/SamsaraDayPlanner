@@ -3,34 +3,30 @@ package com.wiseassblog.samsaradayplanner.ui.managetaskview;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.wiseassblog.samsaradayplanner.R;
 import com.wiseassblog.samsaradayplanner.common.BaseViewLogic;
-import com.wiseassblog.samsaradayplanner.common.ColorUtility;
-import com.wiseassblog.samsaradayplanner.common.IconUtility;
 import com.wiseassblog.samsaradayplanner.domain.constants.COLOR;
 import com.wiseassblog.samsaradayplanner.domain.constants.ICON;
 import com.wiseassblog.samsaradayplanner.ui.tasklistview.TaskListActivity;
 
+import static com.wiseassblog.samsaradayplanner.common.ResourceUtilsKt.getColorResId;
+import static com.wiseassblog.samsaradayplanner.common.ResourceUtilsKt.getResIdFromEnum;
 import static com.wiseassblog.samsaradayplanner.ui.managetaskview.TaskViewEvent.Event.ON_COLOR_SELECTED;
 import static com.wiseassblog.samsaradayplanner.ui.managetaskview.TaskViewEvent.Event.ON_ICON_SELECTED;
 import static com.wiseassblog.samsaradayplanner.ui.managetaskview.TaskViewEvent.Event.ON_START;
@@ -168,7 +164,7 @@ public class TaskView extends Fragment implements ITaskViewContract.View, ColorP
     @Override
     public void setIconSelection(ICON icon) {
         selectedIcon.setImageResource(
-                IconUtility.getResIdFromEnum(requireContext(), icon)
+                getResIdFromEnum(requireContext(), icon)
         );
     }
 
@@ -182,8 +178,7 @@ public class TaskView extends Fragment implements ITaskViewContract.View, ColorP
         //Lol, this is all actually necessary to color the button
         ColorStateList colorList =
                 ColorStateList.valueOf(
-
-                        ColorUtility.getColorResId(
+                        getColorResId(
                                 requireContext(),
                                 c
                         )

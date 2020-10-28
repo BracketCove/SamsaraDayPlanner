@@ -2,7 +2,7 @@ package com.wiseassblog.samsaradayplanner.ui.dayview
 
 import android.content.Context
 import androidx.annotation.VisibleForTesting
-import com.wiseassblog.samsaradayplanner.common.TimeFormatUtility
+import com.wiseassblog.samsaradayplanner.common.getHourBlockText
 import com.wiseassblog.samsaradayplanner.domain.Day
 import com.wiseassblog.samsaradayplanner.domain.Hour
 import com.wiseassblog.samsaradayplanner.domain.Tasks
@@ -51,7 +51,7 @@ object DayListItemViewMaker {
         for (hour in day.hours) {
             list.add(
                 DayListItemView(
-                    TimeFormatUtility.getHourBlockText(hour.hourInteger, day.mode),
+                    getHourBlockText(hour.hourInteger, day.mode),
                     getIconResIds(hour, tasks, context),
                     getBackgroundsResIds(hour, tasks, context),
                     getTaskNames(hour, tasks),
@@ -135,11 +135,11 @@ object DayListItemViewMaker {
      */
     @VisibleForTesting
     private fun getTaskNames(hour: Hour, tasks: Tasks): Array<String> {
-        val taskNames = Array<String>(4) { "" }
+        val taskNames = Array(4) { "" }
         var index = 0
         for (qh in hour.quarters) {
             val taskId = qh.taskId
-            taskNames[index] = tasks.getTaskById(taskId).taskName
+            taskNames[index] = tasks.getTaskById(taskId)!!.taskName
             index++
         }
         return taskNames
@@ -166,7 +166,7 @@ object DayListItemViewMaker {
         var index = 0
         for (qh in hour.quarters) {
             val taskId = qh.taskId
-            resIds[index] = getBackgroundImageResource(context, tasks.getTaskById(taskId).taskColor)
+            resIds[index] = getBackgroundImageResource(context, tasks.getTaskById(taskId)!!.taskColor)
             index++
         }
         return resIds
@@ -239,7 +239,7 @@ object DayListItemViewMaker {
         var index = 0
         for (qh in hour.quarters) {
             val taskId = qh.taskId
-            resIds[index] = getIconResource(context, tasks.getTaskById(taskId).taskIcon)
+            resIds[index] = getIconResource(context, tasks.getTaskById(taskId)!!.taskIcon)
             index++
         }
         return resIds

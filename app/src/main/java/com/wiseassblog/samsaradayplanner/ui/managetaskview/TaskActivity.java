@@ -10,11 +10,9 @@ import com.wiseassblog.samsaradayplanner.R;
 import com.wiseassblog.samsaradayplanner.SamsaraApp;
 import com.wiseassblog.samsaradayplanner.domain.constants.Extras;
 import com.wiseassblog.samsaradayplanner.ui.dayview.DayActivity;
-import com.wiseassblog.samsaradayplanner.ui.dayview.DayView;
-import com.wiseassblog.samsaradayplanner.ui.dayview.buildlogic.DayViewInjector;
 import com.wiseassblog.samsaradayplanner.ui.managetaskview.buildlogic.TaskViewInjector;
 
-import static com.wiseassblog.samsaradayplanner.common.Messages.GENERIC_ERROR_MESSAGE;
+import static com.wiseassblog.samsaradayplanner.domain.constants.Messages.GENERIC_ERROR_MESSAGE;
 
 public class TaskActivity extends AppCompatActivity {
 
