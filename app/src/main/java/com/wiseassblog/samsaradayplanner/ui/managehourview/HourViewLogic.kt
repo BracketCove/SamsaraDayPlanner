@@ -26,12 +26,13 @@ class HourViewLogic(
         val hour = vm.hour
         var oldQuarterHour: QuarterHour? = null
         var quarterHourIndex = 0
-        for (q in hour.quarters!!) {
+
+
+        hour.quarters.forEachIndexed { index, q ->
             if (q.quarter == quarter) {
                 oldQuarterHour = q
-                break
+                quarterHourIndex = index
             }
-            quarterHourIndex++
         }
 
         //Probably not necessary but working in C made me paranoid
@@ -39,9 +40,10 @@ class HourViewLogic(
             view.showMessage("An error has occurred.")
             view.navigateToDayView()
         }
+
         hour.quarters[quarterHourIndex] = QuarterHour(
             oldQuarterHour!!.taskId,
-            oldQuarterHour.quarter,
+            oldQuarterHour!!.quarter,
             isActive
         )
     }
@@ -56,12 +58,12 @@ class HourViewLogic(
         //Retrieve the correct Quarter Hour from current Hour
         var oldQuarterHour: QuarterHour? = null
         var quarterHourIndex = 0
-        for (q in hour.quarters!!) {
+
+        hour.quarters.forEachIndexed { index, q ->
             if (q.quarter == quarter) {
                 oldQuarterHour = q
-                break
+                quarterHourIndex = index
             }
-            quarterHourIndex++
         }
 
         //Probably not necessary but working in C made me paranoid
@@ -72,7 +74,7 @@ class HourViewLogic(
         hour.quarters[quarterHourIndex] = QuarterHour(
             taskId,
             oldQuarterHour!!.quarter,
-            oldQuarterHour.isActive
+            oldQuarterHour!!.isActive
         )
     }
 
@@ -132,8 +134,9 @@ class HourViewLogic(
 
         //for use in a spinner widget
         val taskNames = Array(tasks.get().size) { index -> tasks.get()[index].taskName }
-        for (q in QUARTER.values()) {
-            view.setQuarterHour(q)
+
+        QUARTER.values().forEach {
+            q ->   view.setQuarterHour(q)
             val formattedHourText = getHourToggleViewFormattedText(
                 q,
                 hour.hourInteger,
@@ -154,6 +157,7 @@ class HourViewLogic(
             )
             index++
         }
+
         view.setListeners()
     }
 

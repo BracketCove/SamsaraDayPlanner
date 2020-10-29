@@ -48,7 +48,8 @@ object DayListItemViewMaker {
         tasks: Tasks
     ): List<DayListItemView> {
         val list: MutableList<DayListItemView> = ArrayList()
-        for (hour in day.hours) {
+
+        day.hours.forEach { hour ->
             list.add(
                 DayListItemView(
                     getHourBlockText(hour.hourInteger, day.mode),
@@ -59,6 +60,7 @@ object DayListItemViewMaker {
                 )
             )
         }
+
         return list
     }
 
@@ -88,13 +90,10 @@ object DayListItemViewMaker {
      * @param hour
      * @return
      */
-    @VisibleForTesting
     private fun getListItemType(hour: Hour): LIST_ITEM_TYPE {
-        val quarters = hour.quarters
         var activeTasks = 0
-        for (q in quarters) {
-            if (q.isActive) activeTasks++
-        }
+
+        hour.quarters.forEach { q -> if (q.isActive) activeTasks++ }
 
         //single hour case
         if (activeTasks == 1) return LIST_ITEM_TYPE.FULL_HOUR
@@ -112,10 +111,10 @@ object DayListItemViewMaker {
             if (!one && !two && three) return LIST_ITEM_TYPE.THREE_QUARTER_QUARTER
         }
         if (activeTasks == 3) {
-            val first = quarters[0].isActive
-            val second = quarters[1].isActive
-            val third = quarters[2].isActive
-            val fourth = quarters[3].isActive
+            val first = hour.quarters[0].isActive
+            val second = hour.quarters[1].isActive
+            val third = hour.quarters[2].isActive
+            val fourth = hour.quarters[3].isActive
 
             //Quarter Half Quarter: 1st is active, 2nd is active, 3rd is inactive, 4th is active
             if (first && second && !third && fourth) return LIST_ITEM_TYPE.QUARTER_HALF_QUARTER
@@ -133,15 +132,13 @@ object DayListItemViewMaker {
      * @param hour
      * @return
      */
-    @VisibleForTesting
     private fun getTaskNames(hour: Hour, tasks: Tasks): Array<String> {
         val taskNames = Array(4) { "" }
-        var index = 0
-        for (qh in hour.quarters) {
-            val taskId = qh.taskId
-            taskNames[index] = tasks.getTaskById(taskId)!!.taskName
-            index++
+
+        hour.quarters.forEachIndexed { index, quarter ->
+            taskNames[index] = tasks.getTaskById(quarter.taskId)!!.taskName
         }
+
         return taskNames
     }
 
@@ -160,19 +157,19 @@ object DayListItemViewMaker {
      * @param context
      * @return
      */
-    @VisibleForTesting
     private fun getBackgroundsResIds(hour: Hour, tasks: Tasks, context: Context): IntArray {
         val resIds = IntArray(4)
-        var index = 0
-        for (qh in hour.quarters) {
-            val taskId = qh.taskId
-            resIds[index] = getBackgroundImageResource(context, tasks.getTaskById(taskId)!!.taskColor)
-            index++
+
+        hour.quarters.forEachIndexed { index, qh ->
+            resIds[index] = getBackgroundImageResource(
+                context,
+                tasks.getTaskById(qh.taskId)!!.taskColor
+            )
         }
+
         return resIds
     }
 
-    @VisibleForTesting
     private fun getBackgroundImageResource(context: Context, taskColor: COLOR): Int {
         return when (taskColor) {
             COLOR.DARK_BLUE -> context.resources
@@ -230,10 +227,8 @@ object DayListItemViewMaker {
                     context.packageName
                 )
         }
-        return 0
     }
 
-    @VisibleForTesting
     private fun getIconResIds(hour: Hour, tasks: Tasks, context: Context): IntArray {
         val resIds = IntArray(4)
         var index = 0
@@ -245,7 +240,6 @@ object DayListItemViewMaker {
         return resIds
     }
 
-    @VisibleForTesting
     private fun getIconResource(context: Context, icon: ICON): Int {
         return when (icon) {
             ICON.FREE_TIME -> context.resources
@@ -303,6 +297,5 @@ object DayListItemViewMaker {
                     context.packageName
                 )
         }
-        return 0
     }
 }
