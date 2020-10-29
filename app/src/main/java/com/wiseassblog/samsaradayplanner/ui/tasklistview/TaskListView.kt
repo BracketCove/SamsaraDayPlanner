@@ -38,13 +38,11 @@ class TaskListView : Fragment(), ITaskListViewContract.View {
     override fun onStart() {
         super.onStart()
         back = requireView().findViewById(R.id.tlb_icon)
-        back.setOnClickListener(
-            View.OnClickListener { v: View? ->
-                logic?.onViewEvent(
-                    TasksListViewEvent.OnBackPressed
-                )
-            }
-        )
+        back.setOnClickListener { v: View? ->
+            logic?.onViewEvent(
+                TasksListViewEvent.OnBackPressed
+            )
+        }
         taskGrid = requireView().findViewById(R.id.gdl_list_item_task)
     }
 
@@ -55,11 +53,10 @@ class TaskListView : Fragment(), ITaskListViewContract.View {
 
     override fun setTasks(tasks: Tasks) {
         val adapter = TaskGridItemViewAdapter(
-            requireContext(),
             tasks.get()
         )
-        taskGrid!!.adapter = adapter
-        taskGrid!!.onItemClickListener =
+        taskGrid.adapter = adapter
+        taskGrid.onItemClickListener =
             OnItemClickListener { adapterView: AdapterView<*>?, clickView: View?, position: Int, id: Long ->
                 logic?.onViewEvent(
                     TasksListViewEvent.OnListItemSelected(position)

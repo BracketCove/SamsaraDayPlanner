@@ -131,7 +131,7 @@ class HourViewLogic(
         var index = 0
 
         //for use in a spinner widget
-        val taskNames = getTaskNames(tasks.get().size, tasks.get())
+        val taskNames = Array(tasks.get().size) { index -> tasks.get()[index].taskName }
         for (q in QUARTER.values()) {
             view.setQuarterHour(q)
             val formattedHourText = getHourToggleViewFormattedText(
@@ -157,12 +157,4 @@ class HourViewLogic(
         view.setListeners()
     }
 
-    private fun getTaskNames(length: Int, tasks: Array<Task>): Array<String> {
-        val taskNames = emptyArray<String>()
-        for (i in 0 until length) {
-            taskNames[i] = tasks[i].taskName
-        }
-
-        return taskNames
-    }
 }

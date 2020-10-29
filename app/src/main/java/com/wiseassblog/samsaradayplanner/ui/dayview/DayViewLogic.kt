@@ -7,15 +7,9 @@ import com.wiseassblog.samsaradayplanner.domain.IDayStorage
 import com.wiseassblog.samsaradayplanner.domain.ITaskStorage
 import com.wiseassblog.samsaradayplanner.domain.Tasks
 
-//Decision maker (logic) class for the Front End
 class DayViewLogic(
     private val view: IDayViewContract.View,
-    private val vm: IDayViewContract.ViewModel, //backend IO devices
-    //this is an example of the Facade Pattern
-    //Hide the details of a sub-system
-    //A more useful advanced pattern is the Observer Pattern/Publisher Subscriber (RxJava well)
-    //I learned patterns from a book called
-    // Design Patterns Explained James R. Trott & Alan Shalloway
+    private val vm: IDayViewContract.ViewModel,
     private val dayStorage: IDayStorage,
     private val taskStorage: ITaskStorage
 ) : BaseViewLogic<DayViewEvent>() {
@@ -35,14 +29,6 @@ class DayViewLogic(
         view.navigateToHourView(hourInteger)
     }
 
-    /**
-     * 1. Get data from both data sources
-     * 2. Give data to the VMs
-     * 3. Give data to the Views
-     *
-     *
-     *
-     */
     private fun onStart() {
         dayStorage.getDay(
             { day ->

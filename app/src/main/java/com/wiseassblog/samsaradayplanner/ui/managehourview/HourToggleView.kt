@@ -18,7 +18,7 @@ class HourToggleView(context: Context, attrs: AttributeSet?) : ConstraintLayout(
 
     lateinit var quarter: QUARTER
 
-    lateinit var onQuarterToggle: (quarter: QUARTER, activate: Boolean) -> Unit
+    var onQuarterToggle: ((quarter: QUARTER, activate: Boolean) -> Unit)? = null
 
     fun setToggleState(quarter: QUARTER, isActive: Boolean) {
         if (quarter != QUARTER.ZERO) {
@@ -52,7 +52,7 @@ class HourToggleView(context: Context, attrs: AttributeSet?) : ConstraintLayout(
         quarterHourIsActive = findViewById(R.id.swi_activate_quarter_hour)
         quarterHourIsActive.setOnCheckedChangeListener(
             { view: CompoundButton?, isChecked: Boolean ->
-                onQuarterToggle(quarter, isChecked)
+                onQuarterToggle?.let { it(quarter, isChecked) }
                 setTimeLabelColor(isChecked)
             }
         )

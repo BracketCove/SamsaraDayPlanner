@@ -18,8 +18,8 @@ fun getResIdFromEnum(context: Context, icon: ICON?): Int {
         ICON.MENTAL_CULTIVATION -> return getId("ic_bhavana", context)
         ICON.EAT -> return getId("ic_eat", context)
         ICON.SLEEP -> return getId("ic_rest", context)
-        ICON.SHOP -> return getId("ic_shopping", context)
-        else -> FREE_TIME@ return getId("ic_free_time", context)
+        ICON.SHOP -> return getId("ic_shop", context)
+        else -> return getId("ic_free_time", context)
     }
 }
 
