@@ -6,11 +6,11 @@
     android:id="@+id/root_tasks_view_fragment"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <include
-        layout="@layout/toolbar_tasks"
+
+    <androidx.compose.ui.platform.ComposeView
         android:id="@+id/tlb_tasks"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent" />
 
     <GridView

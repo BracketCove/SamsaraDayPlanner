@@ -25,7 +25,6 @@ import com.wiseassblog.samsaradayplanner.ui.tasklistview.TaskListActivity
 class DayView : Fragment(), IDayViewContract.View {
     private var logic: BaseViewLogic<DayViewEvent>? = null
     private var rec: RecyclerView? = null
-    private var toolbarManageTasks: ImageButton? = null
     private var adapter: DayAdapter? = null
 
     fun setLogic(logic: BaseViewLogic<DayViewEvent>?) {
@@ -42,14 +41,18 @@ class DayView : Fragment(), IDayViewContract.View {
 
     override fun onStart() {
         super.onStart()
-        toolbarManageTasks = requireView().findViewById(R.id.imb_toolbar_manage_tasks)
-        toolbarManageTasks?.setOnClickListener {
-            logic?.onViewEvent(
-                DayViewEvent.OnManageTasksSelected
-            )
+
+        requireView().findViewById<ComposeView>(R.id.tlb_day_view).setContent {
+            DayViewToolbar {
+                logic?.onViewEvent(
+                    DayViewEvent.OnManageTasksSelected
+                )
+            }
         }
+
         rec = requireView().findViewById(R.id.rec_day_list)
     }
+
 
     override fun onResume() {
         super.onResume()

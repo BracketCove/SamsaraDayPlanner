@@ -1,10 +1,7 @@
 package com.wiseassblog.samsaradayplanner.ui.tasklistview
 
-import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.BaseAdapter
 import com.wiseassblog.samsaradayplanner.common.getColorResId
 import com.wiseassblog.samsaradayplanner.common.getResIdFromEnum
@@ -27,7 +24,7 @@ internal class TaskGridItemViewAdapter(private val taskItems: Array<Task>) :
 
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
-        var gridItem:TaskGridItemView? = view as TaskGridItemView?
+        var gridItem: TaskGridItemView? = view as TaskGridItemView?
 
         if (gridItem == null) gridItem = TaskGridItemView(parent.context)
 

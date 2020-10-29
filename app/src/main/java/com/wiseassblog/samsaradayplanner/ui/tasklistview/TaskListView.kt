@@ -10,6 +10,7 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.GridView
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.wiseassblog.samsaradayplanner.R
 import com.wiseassblog.samsaradayplanner.common.BaseViewLogic
@@ -20,7 +21,6 @@ import com.wiseassblog.samsaradayplanner.ui.managetaskview.TaskActivity
 
 class TaskListView : Fragment(), ITaskListViewContract.View {
     private var logic: BaseViewLogic<TasksListViewEvent>? = null
-    private lateinit var back: ImageButton
     private lateinit var taskGrid: GridView
 
     fun setLogic(logic: BaseViewLogic<TasksListViewEvent>) {
@@ -37,12 +37,14 @@ class TaskListView : Fragment(), ITaskListViewContract.View {
 
     override fun onStart() {
         super.onStart()
-        back = requireView().findViewById(R.id.tlb_icon)
-        back.setOnClickListener { v: View? ->
-            logic?.onViewEvent(
-                TasksListViewEvent.OnBackPressed
-            )
+        requireView().findViewById<ComposeView>(R.id.tlb_tasks).setContent {
+            TaskListViewToolbar{
+                logic?.onViewEvent(
+                    TasksListViewEvent.OnBackPressed
+                )
+            }
         }
+
         taskGrid = requireView().findViewById(R.id.gdl_list_item_task)
     }
 

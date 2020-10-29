@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.wiseassblog.samsaradayplanner.R
@@ -16,12 +17,13 @@ import com.wiseassblog.samsaradayplanner.common.getColorResId
 import com.wiseassblog.samsaradayplanner.common.getResIdFromEnum
 import com.wiseassblog.samsaradayplanner.domain.constants.COLOR
 import com.wiseassblog.samsaradayplanner.domain.constants.ICON
+import com.wiseassblog.samsaradayplanner.ui.dayview.DayViewEvent
+import com.wiseassblog.samsaradayplanner.ui.dayview.DayViewToolbar
 import com.wiseassblog.samsaradayplanner.ui.managetaskview.IconSpinnerItem.Companion.getItems
 import com.wiseassblog.samsaradayplanner.ui.tasklistview.TaskListActivity
 
 class TaskView : Fragment(), ITaskViewContract.View {
     private var logic: BaseViewLogic<TaskViewEvent>? = null
-    private lateinit var doneButton: ImageButton
     private lateinit var selectColorButton: Button
     private lateinit var nameField: EditText
     private lateinit var selectedIcon: ImageView
@@ -35,19 +37,21 @@ class TaskView : Fragment(), ITaskViewContract.View {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_manage_task, container, false)
         selectColorButton = view.findViewById(R.id.btn_select_colour)
-        selectColorButton.setOnClickListener({
+        selectColorButton.setOnClickListener {
             logic?.onViewEvent(
                 TaskViewEvent.OnColorButtonClick
             )
         }
-        )
-        doneButton = view.findViewById(R.id.tlb_icon)
-        doneButton.setOnClickListener({
+
+
+        view.findViewById<ComposeView>(R.id.tlb_manage_task).setContent {
+            TaskViewToolbar {
                 logic?.onViewEvent(
                     TaskViewEvent.OnDoneClick
                 )
             }
-        )
+        }
+
         selectedIcon = view.findViewById(R.id.imv_icon_selection)
         iconSpinner = view.findViewById(R.id.spn_task_icon)
         val adapter = IconSpinnerAdapter(
@@ -87,7 +91,7 @@ class TaskView : Fragment(), ITaskViewContract.View {
     override fun onResume() {
         super.onResume()
         logic?.onViewEvent(
-                TaskViewEvent.OnStart
+            TaskViewEvent.OnStart
         )
     }
 

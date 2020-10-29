@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.wiseassblog.samsaradayplanner.R
 import com.wiseassblog.samsaradayplanner.common.BaseViewLogic
@@ -18,6 +19,7 @@ class HourView : Fragment(), IHourContract.View {
     private var second: HourToggleView? = null
     private var third: HourToggleView? = null
     private var fourth: HourToggleView? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,18 +32,23 @@ class HourView : Fragment(), IHourContract.View {
         fourth = v.findViewById(R.id.vqht_four)
 
         //toolbar action button
-        v.findViewById<View>(R.id.tlb_icon).setOnClickListener {
-            logic?.onViewEvent(
-                HourViewEvent.OnDoneClick
-            )
+        v.findViewById<ComposeView>(R.id.tlb_hour_view).setContent {
+            HourViewToolbar {
+                logic?.onViewEvent(
+                    HourViewEvent.OnDoneClick
+                )
+            }
         }
+
         return v
     }
 
     fun onQuarterToggle(quarter: QUARTER, activate: Boolean) {
         logic?.onViewEvent(
-            HourViewEvent.OnQuarterToggled( quarter,
-                activate)
+            HourViewEvent.OnQuarterToggled(
+                quarter,
+                activate
+            )
         )
     }
 
