@@ -19,7 +19,7 @@ import com.wiseassblog.samsaradayplanner.ui.dayview.DayAdapter.BaseViewHolder
  * approach. Live and learn.
  */
 internal class DayAdapter(
-    private val data: List<DayListItemView>,
+    private val data: List<DayListItem>,
     private val callback: (Int) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
@@ -220,7 +220,7 @@ internal class DayAdapter(
      */
     private fun bindThreeTaskViewHolder(
         fvh: ThreeTaskViewHolder,
-        item: DayListItemView,
+        item: DayListItem,
         firstIndex: Int,
         secondIndex: Int,
         thirdIndex: Int
@@ -238,7 +238,7 @@ internal class DayAdapter(
 
     private fun bindTwoTaskViewHolder(
         tvh: TwoTaskViewHolder,
-        item: DayListItemView,
+        item: DayListItem,
         firstIndex: Int,
         secondIndex: Int
     ) {

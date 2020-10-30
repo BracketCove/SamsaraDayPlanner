@@ -7,7 +7,7 @@ import com.wiseassblog.samsaradayplanner.common.getColorResId
 import com.wiseassblog.samsaradayplanner.common.getResIdFromEnum
 import com.wiseassblog.samsaradayplanner.domain.Task
 
-internal class TaskGridItemViewAdapter(private val taskItems: Array<Task>) :
+internal class TaskGridItemAdapter(private val taskItems: Array<Task>) :
     BaseAdapter() {
 
     override fun getCount(): Int {
@@ -24,11 +24,11 @@ internal class TaskGridItemViewAdapter(private val taskItems: Array<Task>) :
 
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
-        var gridItem: TaskGridItemView? = view as TaskGridItemView?
+        var gridItem: TaskGridItem? = view as TaskGridItem?
 
-        if (gridItem == null) gridItem = TaskGridItemView(parent.context)
+        if (gridItem == null) gridItem = TaskGridItem(parent.context)
 
-        gridItem = TaskGridItemView(parent.context)
+        gridItem = TaskGridItem(parent.context)
 
         gridItem.setListItemBackground(
             getColorResId(

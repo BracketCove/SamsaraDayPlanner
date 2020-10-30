@@ -9,17 +9,17 @@ import com.wiseassblog.samsaradayplanner.domain.constants.ICON
 
 
 fun getResIdFromEnum(context: Context, icon: ICON?): Int {
-    when (icon) {
-        ICON.FREE_TIME -> return getId("ic_free_time", context)
-        ICON.BREAK -> return getId("ic_break", context)
-        ICON.STUDY -> return getId("ic_study", context)
-        ICON.WORK -> return getId("ic_work", context)
-        ICON.EXERCISE -> return getId("ic_exercise", context)
-        ICON.MENTAL_CULTIVATION -> return getId("ic_bhavana", context)
-        ICON.EAT -> return getId("ic_eat", context)
-        ICON.SLEEP -> return getId("ic_rest", context)
-        ICON.SHOP -> return getId("ic_shop", context)
-        else -> return getId("ic_free_time", context)
+    return when (icon) {
+        ICON.FREE_TIME -> getId("ic_free_time", context)
+        ICON.BREAK -> getId("ic_break", context)
+        ICON.STUDY -> getId("ic_study", context)
+        ICON.WORK -> getId("ic_work", context)
+        ICON.EXERCISE -> getId("ic_exercise", context)
+        ICON.MENTAL_CULTIVATION -> getId("ic_bhavana", context)
+        ICON.EAT -> getId("ic_eat", context)
+        ICON.SLEEP -> getId("ic_rest", context)
+        ICON.SHOP -> getId("ic_shop", context)
+        else -> getId("ic_free_time", context)
     }
 }
 
@@ -70,7 +70,7 @@ fun getColorResId(context: Context?, color: COLOR?): Int {
             context!!,
             R.color.teal
         )
-        else -> FREE_TIME@ return ContextCompat.getColor(
+        else -> return ContextCompat.getColor(
             context!!,
             R.color.lightBlue
         )

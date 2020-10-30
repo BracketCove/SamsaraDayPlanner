@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
@@ -63,7 +62,7 @@ class DayView : Fragment(), IDayViewContract.View {
 
     override fun setData(day: Day, tasks: Tasks) {
         adapter = DayAdapter(
-            DayListItemViewMaker.getItemList(
+            DayListItemMaker.getItemList(
                 requireContext(),
                 day,
                 tasks

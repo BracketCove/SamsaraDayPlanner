@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.GridView
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
@@ -20,10 +19,10 @@ import com.wiseassblog.samsaradayplanner.ui.dayview.DayActivity
 import com.wiseassblog.samsaradayplanner.ui.managetaskview.TaskActivity
 
 class TaskListView : Fragment(), ITaskListViewContract.View {
-    private var logic: BaseViewLogic<TasksListViewEvent>? = null
+    private var logic: BaseViewLogic<TaskListViewEvent>? = null
     private lateinit var taskGrid: GridView
 
-    fun setLogic(logic: BaseViewLogic<TasksListViewEvent>) {
+    fun setLogic(logic: BaseViewLogic<TaskListViewEvent>) {
         this.logic = logic
     }
 
@@ -40,7 +39,7 @@ class TaskListView : Fragment(), ITaskListViewContract.View {
         requireView().findViewById<ComposeView>(R.id.tlb_tasks).setContent {
             TaskListViewToolbar{
                 logic?.onViewEvent(
-                    TasksListViewEvent.OnBackPressed
+                    TaskListViewEvent.OnBackPressed
                 )
             }
         }
@@ -50,18 +49,18 @@ class TaskListView : Fragment(), ITaskListViewContract.View {
 
     override fun onResume() {
         super.onResume()
-        logic?.onViewEvent(TasksListViewEvent.OnStart)
+        logic?.onViewEvent(TaskListViewEvent.OnStart)
     }
 
     override fun setTasks(tasks: Tasks) {
-        val adapter = TaskGridItemViewAdapter(
+        val adapter = TaskGridItemAdapter(
             tasks.get()
         )
         taskGrid.adapter = adapter
         taskGrid.onItemClickListener =
             OnItemClickListener { adapterView: AdapterView<*>?, clickView: View?, position: Int, id: Long ->
                 logic?.onViewEvent(
-                    TasksListViewEvent.OnListItemSelected(position)
+                    TaskListViewEvent.OnListItemSelected(position)
                 )
             }
     }

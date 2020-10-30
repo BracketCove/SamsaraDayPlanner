@@ -41,7 +41,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_task_name"
         app:layout_constraintBottom_toTopOf="@+id/btn_select_colour"
-
         />
 
     <Spinner

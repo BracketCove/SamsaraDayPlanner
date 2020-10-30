@@ -9,7 +9,7 @@ import com.wiseassblog.samsaradayplanner.common.getColorResId
 import com.wiseassblog.samsaradayplanner.common.getResIdFromEnum
 import com.wiseassblog.samsaradayplanner.domain.Tasks
 
-internal class TaskGridItemView(context: Context) : ConstraintLayout(context) {
+internal class TaskGridItem(context: Context) : ConstraintLayout(context) {
     private var background: ImageView? = null
     private var icon: ImageView? = null
     private var taskName: TextView? = null
@@ -36,10 +36,10 @@ internal class TaskGridItemView(context: Context) : ConstraintLayout(context) {
         build()
     }
 
-    fun getTaskGridItems(context: Context, tasks: Tasks): List<TaskGridItemView> {
-        val taskItems: MutableList<TaskGridItemView> = ArrayList()
+    fun getTaskGridItems(context: Context, tasks: Tasks): List<TaskGridItem> {
+        val taskItems: MutableList<TaskGridItem> = ArrayList()
         for (t in tasks.get()) {
-            val newItem = TaskGridItemView(context)
+            val newItem = TaskGridItem(context)
             newItem.setListItemBackground(
                 getColorResId(
                     context,

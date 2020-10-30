@@ -5,7 +5,7 @@ import com.wiseassblog.samsaradayplanner.domain.constants.QUARTER
 
 fun getHourBlockText(hour: Int, mode: HOUR_MODE): String {
     var suffix = ""
-    var hourText = Integer.toString(hour)
+    var hourText = hour.toString()
 
     //Twelve hour clock is stupid
     if (mode == HOUR_MODE.TWELVE_HOUR) {

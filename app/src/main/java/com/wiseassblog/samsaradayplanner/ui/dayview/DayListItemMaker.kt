@@ -1,7 +1,6 @@
 package com.wiseassblog.samsaradayplanner.ui.dayview
 
 import android.content.Context
-import androidx.annotation.VisibleForTesting
 import com.wiseassblog.samsaradayplanner.common.getHourBlockText
 import com.wiseassblog.samsaradayplanner.domain.Day
 import com.wiseassblog.samsaradayplanner.domain.Hour
@@ -24,7 +23,7 @@ import java.util.*
  * forEach (Hour in Day.Hours)
  * Create DayListItemView
  */
-object DayListItemViewMaker {
+object DayListItemMaker {
     /**
      * Important note: DayListItemView is a data model which is exclusively concerned with rendering
      * the UI. As a result, we may not map directly from arrays of size 4 (i.e. when we call
@@ -46,12 +45,12 @@ object DayListItemViewMaker {
         context: Context,
         day: Day,
         tasks: Tasks
-    ): List<DayListItemView> {
-        val list: MutableList<DayListItemView> = ArrayList()
+    ): List<DayListItem> {
+        val list: MutableList<DayListItem> = ArrayList()
 
         day.hours.forEach { hour ->
             list.add(
-                DayListItemView(
+                DayListItem(
                     getHourBlockText(hour.hourInteger, day.mode),
                     getIconResIds(hour, tasks, context),
                     getBackgroundsResIds(hour, tasks, context),

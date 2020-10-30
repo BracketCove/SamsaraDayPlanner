@@ -30,6 +30,7 @@ class TaskView : Fragment(), ITaskViewContract.View {
     private lateinit var iconSpinner: Spinner
     private lateinit var bottomSheetView: ColorPickerView
     private lateinit var bs: BottomSheetBehavior<*>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

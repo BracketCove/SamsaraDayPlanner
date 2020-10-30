@@ -16,7 +16,7 @@ import androidx.annotation.IntegerRes
  *
  * See the DayListViewItemMaker class for more details
  */
-class DayListItemView(
+class DayListItem(
     val hourBlockText: String,
     @field:IntegerRes val iconResId: IntArray,
     @field:IntegerRes val backgroundResId: IntArray,

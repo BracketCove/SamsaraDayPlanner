@@ -13,6 +13,9 @@ class Tasks(private val tasks: Array<Task>) : Serializable {
         return tasks
     }
 
+    fun getFirstHalf(): List<Task> = tasks.asList().chunked(5)[0]
+    fun getSecondHalf(): List<Task> = tasks.asList().chunked(5)[1]
+
     fun getTaskById(taskId: Int): Task? {
         for (task in tasks) {
             if (task.taskId == taskId) return task
