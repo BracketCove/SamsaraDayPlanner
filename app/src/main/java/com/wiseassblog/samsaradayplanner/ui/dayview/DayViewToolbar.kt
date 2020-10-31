@@ -26,6 +26,7 @@ fun DayViewToolbar(
         title = {
             Text(
                 text = TITLE,
+                style = MaterialTheme.typography.h6
             )
         },
         actions = {

@@ -1,5 +1,7 @@
 package com.wiseassblog.samsaradayplanner.ui.tasklistview
 
+import com.wiseassblog.samsaradayplanner.common.Publisher
+import com.wiseassblog.samsaradayplanner.common.Subscriber
 import com.wiseassblog.samsaradayplanner.domain.Tasks
 
 class TaskListViewModel : ITaskListViewContract.ViewModel {

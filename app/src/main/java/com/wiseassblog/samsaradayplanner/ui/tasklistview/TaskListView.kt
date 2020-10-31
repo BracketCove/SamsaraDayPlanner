@@ -13,6 +13,8 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.wiseassblog.samsaradayplanner.R
 import com.wiseassblog.samsaradayplanner.common.BaseViewLogic
+import com.wiseassblog.samsaradayplanner.common.Publisher
+import com.wiseassblog.samsaradayplanner.common.Subscriber
 import com.wiseassblog.samsaradayplanner.domain.Tasks
 import com.wiseassblog.samsaradayplanner.domain.constants.Extras
 import com.wiseassblog.samsaradayplanner.ui.dayview.DayActivity
@@ -20,7 +22,6 @@ import com.wiseassblog.samsaradayplanner.ui.managetaskview.TaskActivity
 
 class TaskListView : Fragment(), ITaskListViewContract.View {
     private var logic: BaseViewLogic<TaskListViewEvent>? = null
-    private lateinit var taskGrid: GridView
 
     fun setLogic(logic: BaseViewLogic<TaskListViewEvent>) {
         this.logic = logic
@@ -31,20 +32,7 @@ class TaskListView : Fragment(), ITaskListViewContract.View {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_tasks, container, false)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        requireView().findViewById<ComposeView>(R.id.tlb_tasks).setContent {
-            TaskListViewToolbar{
-                logic?.onViewEvent(
-                    TaskListViewEvent.OnBackPressed
-                )
-            }
-        }
-
-        taskGrid = requireView().findViewById(R.id.gdl_list_item_task)
+        return ComposeView(context = requireContext())
     }
 
     override fun onResume() {
@@ -53,18 +41,25 @@ class TaskListView : Fragment(), ITaskListViewContract.View {
     }
 
     override fun setTasks(tasks: Tasks) {
-        val adapter = TaskGridItemAdapter(
-            tasks.get()
-        )
-        taskGrid.adapter = adapter
-        taskGrid.onItemClickListener =
-            OnItemClickListener { adapterView: AdapterView<*>?, clickView: View?, position: Int, id: Long ->
-                logic?.onViewEvent(
-                    TaskListViewEvent.OnListItemSelected(position)
+
+        (requireView() as ComposeView).apply {
+            setContent {
+                TaskListScreen(
+                    tasks = tasks,
+                    backClickHandler = ::handleBackClick,
+                    itemClickHandler = ::handleItemClick
                 )
             }
+        }
     }
 
+    private fun handleBackClick(){
+        logic?.onViewEvent(TaskListViewEvent.OnBackPressed)
+    }
+
+    private fun handleItemClick(taskId: Int) {
+        logic?.onViewEvent(TaskListViewEvent.OnListItemSelected(taskId))
+    }
     override fun showMessage(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
@@ -95,4 +90,6 @@ class TaskListView : Fragment(), ITaskListViewContract.View {
             return TaskListView()
         }
     }
+
+
 }

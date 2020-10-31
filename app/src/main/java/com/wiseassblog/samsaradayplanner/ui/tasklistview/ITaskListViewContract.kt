@@ -1,5 +1,6 @@
 package com.wiseassblog.samsaradayplanner.ui.tasklistview
 
+import com.wiseassblog.samsaradayplanner.common.Subscriber
 import com.wiseassblog.samsaradayplanner.domain.Tasks
 
 interface ITaskListViewContract {

@@ -27,15 +27,19 @@ import com.wiseassblog.samsaradayplanner.ui.burntOrange
 import com.wiseassblog.samsaradayplanner.ui.darkBlue
 import com.wiseassblog.samsaradayplanner.ui.green
 import com.wiseassblog.samsaradayplanner.ui.managehourview.HourViewToolbar
+import com.wiseassblog.samsaradayplanner.ui.managetaskview.TaskViewToolbar
 
 @Composable
-fun TaskListScreen(tasks: Tasks) {
+fun TaskListScreen(tasks: Tasks,
+                   backClickHandler:(() -> Unit)?,
+                   itemClickHandler:((Int) -> Unit)?
+) {
     SamsaraTheme {
         Scaffold(
             topBar = {
-                HourViewToolbar(
+                TaskListViewToolbar(
                     clickHandler = {
-                        Log.d("DEMO", "Toolbar was clicked")
+                        backClickHandler?.invoke()
                     }
                 )
             }
@@ -45,38 +49,32 @@ fun TaskListScreen(tasks: Tasks) {
                     val size = with(DensityAmbient.current) { (constraints.maxWidth / 2).toDp() }
                     //take half for left column
                     ScrollableColumn(modifier = Modifier.preferredWidth(size)) {
-                            tasks.getFirstHalf().map {
-                                TaskListItem(
-                                    color = colorResource(
-                                        id = getColorResId(
-                                            ContextAmbient.current,
-                                            it.taskColor
-                                        )
-                                    ),
-                                    icon = vectorResource(
-                                        id = getResIdFromEnum(ContextAmbient.current, it.taskIcon)
-                                    ),
-                                    text = it.taskName,
-                                    height = size
-                                )
-                            }
+                        tasks.getFirstHalf().map {
+                            TaskListItem(
+                                color = Color(it.taskColor.rgb),
+                                icon = vectorResource(
+                                    id = getResIdFromEnum(ContextAmbient.current, it.taskIcon)
+                                ),
+                                text = it.taskName,
+                                height = size,
+                                it.taskId,
+                                itemClickHandler
+                            )
+                        }
                     }
 
                     //half for right column
                     ScrollableColumn(modifier = Modifier.preferredWidth(size).offset(x = size)) {
                         tasks.getSecondHalf().map {
                             TaskListItem(
-                                color = colorResource(
-                                    id = getColorResId(
-                                        ContextAmbient.current,
-                                        it.taskColor
-                                    )
-                                ),
+                                color = Color(it.taskColor.rgb),
                                 icon = vectorResource(
                                     id = getResIdFromEnum(ContextAmbient.current, it.taskIcon)
                                 ),
                                 text = it.taskName,
-                                height = size
+                                height = size,
+                                it.taskId,
+                                itemClickHandler
                             )
                         }
                     }
@@ -87,12 +85,20 @@ fun TaskListScreen(tasks: Tasks) {
 }
 
 @Composable
-fun TaskListItem(color: Color, icon: VectorAsset, text: String, height: Dp) {
+fun TaskListItem(color: Color,
+                 icon: VectorAsset,
+                 text: String,
+                 height: Dp,
+                 taskId: Int,
+                 itemClickHandler:((Int) -> Unit)? ) {
     Box(
         modifier = Modifier
             .background(color = color)
             .fillMaxWidth()
             .preferredHeight(height = height)
+            .clickable(
+                onClick = { itemClickHandler?.invoke(taskId)}
+            )
 
     ) {
         Column(Modifier.align(Alignment.Center)) {

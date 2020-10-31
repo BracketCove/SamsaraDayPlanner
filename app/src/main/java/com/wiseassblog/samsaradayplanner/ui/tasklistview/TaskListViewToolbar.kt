@@ -26,6 +26,7 @@ fun TaskListViewToolbar(
         title = {
             Text(
                 text = TITLE,
+                style = MaterialTheme.typography.h6
             )
         },
         navigationIcon = {
